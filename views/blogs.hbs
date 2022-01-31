@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{Title}}</title>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="script1.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="inpDiv">
+    <form action="/blogs" method="POST">
+        <input type="text" name="title" id="title" placeholder="Enter Title">
+        <select name="category" name="category" id="category">
+            <option value="Entertainment">Entertainment</option>
+            <option value="Technology">Technology</option>
+            <option value="DSA">DSA</option>
+            <option value="Web">Web</option>
+            <option value="Android">Android</option>
+        </select>
+        <input type="text" name="email" id="email" placeholder="Enter Email">
+        <input type="text" name="author" id="author" placeholder="Enter Author Name">
+        <input type="text" name="content" id="content" placeholder="Enter Content (At Max 150 Character)" max="150">
+        <input type="date" name="uploadDate" id="uploadDate" placeholder="Enter Date Of Upload (DD/MM/yyyy)">
+        <button type="submit" name="btn" id="btn">Save the Blog</button>
+    </form>
+    </div>
+    <br>
+    <br>
+
+    <div id="myDiv">
+        {{#each blogs as |blog|}}
+        <div class="card">
+            <div class="card-body">
+                <h3 class="card-title">Title : {{blog.title}}</h3>
+                <h6 class="card-subtitle mb-2 text-muted">CATEGORY : {{blog.category}}</h6>
+                <h6 class="card-subtitle mb-2 text-muted">BY : {{blog.author}}({{blog.email}})</h6>
+                <h6 class="card-subtitle mb-2 text-muted">ON : {{blog.uploadDate}}</h6>
+                <div class="box">
+                    <div class="text">{{blog.content}}</div>
+                </div>
+                <a href="blogs/swap?mode=hbs&&id1={{blog.id}}&&action=up" class="btn-primary">Up</a>
+                <a href="blogs/swap?mode=hbs&&id1={{blog.id}}&&action=down" class="btn-primary">Down</a>
+                <a href="blogs/delete/{{blog.id}}/hbs" class="btn-primary">Delete</a>
+                <a href="blogs/hbs/edit/{{blog.id}}" class="btn-primary">Edit</a>
+
+            </div>
+        </div>
+        {{/each}}
+    </div>
+</body>
+
+</html>
